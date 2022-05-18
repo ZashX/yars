@@ -1,0 +1,24 @@
+project movies;
+
+unit user {
+	Age int32;
+	BannedMovies []string;
+	BannedAuthors []string;
+}
+
+unit movie {
+	Author string;
+	Flags []bool;
+}
+
+action rate user@movie;
+
+action watched user@movie;
+
+recommend bestFilms user@movie {
+	rate: rate;
+	filter:
+		not movie.ID in user.BannedMovies and
+		not movie.Author in user.BannedAuthors and
+		not watched;
+}

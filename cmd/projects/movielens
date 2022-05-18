@@ -1,0 +1,19 @@
+project movielens;
+
+unit user {
+	Age			int32;
+	Gender 		string;
+	Code		string;
+	Occupation 	string;
+}
+
+unit movie {
+	Features    []float32;
+}
+
+action rate user@movie;
+
+recommend bestFilms user@movie {
+	rate: rate;
+	filter: o;
+}
